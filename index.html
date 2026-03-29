@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>判断力测评 - 发现你的判断力画像</title>
+  <meta name="description" content="通过11个真实情境，了解你的AI判断力、决策判断力、价值判断力和独特性识别能力">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+  <div id="app" class="container mx-auto px-4 py-8 max-w-2xl">
+    
+    <header class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-slate-800 mb-2">判断力测评</h1>
+      <p class="text-slate-500">发现你在AI时代的判断力画像</p>
+    </header>
+
+    <main id="main-content">
+      
+      <section id="start-page" class="bg-white rounded-2xl shadow-lg p-8 text-center">
+        <div class="mb-6">
+          <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-semibold text-slate-800 mb-3">测测你的判断力</h2>
+          <p class="text-slate-600 mb-4">
+            在AI时代，判断力比知识更重要。<br>
+            通过11个真实情境，了解你的判断力画像。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+          <div class="bg-slate-50 rounded-lg p-3">
+            <div class="font-medium text-slate-700">AI判断力</div>
+            <div class="text-slate-500">识别AI输出质量</div>
+          </div>
+          <div class="bg-slate-50 rounded-lg p-3">
+            <div class="font-medium text-slate-700">决策判断力</div>
+            <div class="text-slate-500">不确定中决策</div>
+          </div>
+          <div class="bg-slate-50 rounded-lg p-3">
+            <div class="font-medium text-slate-700">价值判断力</div>
+            <div class="text-slate-500">伦理与价值观</div>
+          </div>
+          <div class="bg-slate-50 rounded-lg p-3">
+            <div class="font-medium text-slate-700">独特性识别</div>
+            <div class="text-slate-500">认识自我价值</div>
+          </div>
+        </div>
+        
+        <div class="flex items-center justify-center text-slate-400 text-sm mb-6">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          约3分钟完成
+        </div>
+        
+        <button id="start-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]">
+          开始测评
+        </button>
+      </section>
+
+      <section id="question-page" class="hidden">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-4">
+          <div class="flex items-center justify-between mb-4">
+            <span id="category-badge" class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full"></span>
+            <span id="progress-text" class="text-slate-500 text-sm"></span>
+          </div>
+          
+          <div class="w-full bg-slate-200 rounded-full h-2 mb-6">
+            <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+          
+          <h2 id="scenario-text" class="text-lg text-slate-800 leading-relaxed mb-6"></h2>
+          
+          <div id="options-container" class="space-y-3">
+          </div>
+        </div>
+        
+        <div class="flex justify-between">
+          <button id="prev-btn" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            上一题
+          </button>
+          <button id="next-btn" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            下一题
+          </button>
+        </div>
+      </section>
+
+      <section id="result-page" class="hidden">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-4">
+          <div class="text-center mb-6">
+            <div id="profile-icon" class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl text-white font-bold" id="profile-initial"></span>
+            </div>
+            <h2 id="profile-name" class="text-2xl font-bold text-slate-800 mb-2"></h2>
+            <p id="profile-description" class="text-slate-600"></p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="font-semibold text-slate-800 mb-4 text-center">你的判断力画像</h3>
+            <div id="scores-container" class="space-y-4">
+            </div>
+          </div>
+          
+          <div class="text-center mb-6">
+            <div class="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full">
+              <span class="text-lg font-bold mr-2">综合得分</span>
+              <span id="total-score" class="text-2xl font-bold"></span>
+            </div>
+          </div>
+          
+          <div class="border-t border-slate-200 pt-6">
+            <h3 class="font-semibold text-slate-800 mb-3">你的优势</h3>
+            <ul id="strengths-list" class="space-y-2 mb-6"></ul>
+            
+            <h3 class="font-semibold text-slate-800 mb-3">提升建议</h3>
+            <div id="suggestions-container" class="space-y-4"></div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-4">
+          <h3 class="font-semibold text-slate-800 mb-4">答案解析</h3>
+          <div id="analysis-container" class="space-y-4"></div>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-4">
+          <h3 class="font-semibold text-slate-800 mb-4">分享你的结果</h3>
+          <div class="flex gap-3">
+            <button id="copy-btn" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+              </svg>
+              复制结果
+            </button>
+            <button id="restart-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-xl transition-all duration-200">
+              重新测评
+            </button>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-lg p-6 text-white">
+          <h3 class="font-semibold mb-2">想提升判断力？</h3>
+          <p class="text-blue-100 text-sm mb-4">素朴文教提供系统的判断力训练课程，帮助你在AI时代保持竞争力。</p>
+          <a href="#" class="inline-block bg-white text-blue-600 font-medium py-2 px-4 rounded-lg hover:bg-blue-50 transition-all duration-200">
+            了解更多
+          </a>
+        </div>
+      </section>
+      
+    </main>
+
+    <footer class="text-center mt-8 text-slate-400 text-sm">
+      <p>© 2026 素朴文教 · 判断力测评MVP</p>
+    </footer>
+    
+  </div>
+
+  <div id="toast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none">
+    已复制到剪贴板
+  </div>
+
+  <script src="data/scenarios.js"></script>
+  <script src="utils/scorer.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
